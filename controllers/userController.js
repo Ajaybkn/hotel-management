@@ -134,9 +134,28 @@ const updatePasswordController = async (req, res) => {
   }
 };
 
+const deleteUserController = async (req, res) => {
+  try {
+    console.log(req, "klsdk");
+    await userModel.findByIdAndDelete(req.params.id);
+    return res.status(200).send({
+      success: true,
+      message: "user deleted successfully!",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "error in delete user API",
+      error,
+    });
+  }
+};
+
 module.exports = {
   getUserController,
   updateUserController,
   resetPasswordController,
   updatePasswordController,
+  deleteUserController,
 };
