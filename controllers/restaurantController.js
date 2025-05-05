@@ -107,7 +107,7 @@ const deleteRestaurantController = async (req, res) => {
     if (!restaurantId) {
       return res.status(404).send({
         success: false,
-        message: "no restaurant found or provide restaturant ids",
+        message: "no restaurant found or provide restaturant id",
       });
     }
     await restaurantModel.findByIdAndDelete(restaurantId);
