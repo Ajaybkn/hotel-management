@@ -64,7 +64,7 @@ const getAllRestauarantController = async (req, res) => {
     }
     res.status(200).send({
       success: true,
-      message: "restaurant fetched successfully",
+      message: "restaurants fetched successfully",
       totalCount: restaurants.length,
       restaurants,
     });
