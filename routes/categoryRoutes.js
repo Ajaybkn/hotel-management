@@ -4,6 +4,7 @@ const {
   createCategoryController,
   getAllCategoriesController,
   deleteCategory,
+  updateCategory,
 } = require("../controllers/categoryController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
@@ -16,4 +17,5 @@ router.post("/create", authMiddleware, createCategoryController);
 router.get("/getAll", authMiddleware, getAllCategoriesController);
 // delete category
 router.delete("/delete/:id", authMiddleware, deleteCategory);
+router.put("/update/:id", authMiddleware, updateCategory);
 module.exports = router;

@@ -73,8 +73,41 @@ const deleteCategory = async (req, res) => {
     });
   }
 };
+const updateCategory = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const category = await categoryModel.findById(id);
+
+    if (!category) {
+      return res.status(404).send({
+        success: false,
+        message: "Category not found",
+      });
+    }
+
+    const { newCategory } = req.body;
+
+    category.title = newCategory;
+    await category.save();
+
+    res.status(200).send({
+      success: true,
+      message: "Category updated successfully",
+      category,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in update category API",
+      error,
+    });
+  }
+};
+
 module.exports = {
   createCategoryController,
   getAllCategoriesController,
   deleteCategory,
+  updateCategory,
 };
