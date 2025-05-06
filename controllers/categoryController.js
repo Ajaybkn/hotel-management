@@ -38,6 +38,7 @@ const getAllCategoriesController = async (req, res) => {
       success: true,
       message: "categories fetched successfully!",
       allCategories,
+      total: allCategories.length,
     });
   } catch (error) {
     console.log(error);
@@ -48,4 +49,32 @@ const getAllCategoriesController = async (req, res) => {
     });
   }
 };
-module.exports = { createCategoryController, getAllCategoriesController };
+const deleteCategory = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(404).send({
+        success: false,
+        message: "please provide idI",
+        error,
+      });
+    }
+    await categoryModel.findByIdAndDelete({ _id: id });
+    res.status(200).send({
+      success: true,
+      message: "category deleted successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "error in delete category API",
+      error,
+    });
+  }
+};
+module.exports = {
+  createCategoryController,
+  getAllCategoriesController,
+  deleteCategory,
+};
